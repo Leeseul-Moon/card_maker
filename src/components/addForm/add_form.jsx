@@ -12,18 +12,6 @@ const AddForm = ({ addCard }) => {
   const memoRef = useRef();
   const themeRef = useRef();
 
-  // {
-  // id: "1",
-  // name: "moon",
-  // company: "samsung",
-  // job: "Software Engineer",
-  // email: "leeseul@gamil.com",
-  // memo: "Don't forget to code your dream",
-  // photo: "lalalal",
-  // photoURL: null,
-  // theme: "dark",
-  // },
-
   const add = (e) => {
     e.preventDefault();
     const card = {

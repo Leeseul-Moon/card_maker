@@ -8,8 +8,8 @@ import Header from "../header/header";
 import styles from "./maker.module.css";
 
 const Maker = ({ authService }) => {
-  const [cards, setCards] = useState([
-    {
+  const [cards, setCards] = useState({
+    1: {
       id: "1",
       name: "moon",
       company: "samsung",
@@ -20,7 +20,7 @@ const Maker = ({ authService }) => {
       photoURL: null,
       theme: "dark",
     },
-    {
+    2: {
       id: "2",
       name: "kang",
       company: "Uber",
@@ -31,7 +31,7 @@ const Maker = ({ authService }) => {
       photoURL: "lalala.png",
       theme: "light",
     },
-    {
+    3: {
       id: "3",
       name: "June",
       company: "Instagram",
@@ -42,7 +42,8 @@ const Maker = ({ authService }) => {
       photoURL: null,
       theme: "colorful",
     },
-  ]);
+  });
+
   const navigate = useNavigate();
   const onLogout = () => {
     authService.logout();
@@ -56,9 +57,20 @@ const Maker = ({ authService }) => {
     });
   });
 
-  const addCard = (card) => {
-    const updated = [...cards, card];
-    setCards(updated);
+  const createOrUpdateCard = (card) => {
+    setCards((cards) => {
+      const updated = { ...cards };
+      updated[card.id] = card;
+      return updated;
+    });
+  };
+
+  const delCard = (id) => {
+    setCards((cards) => {
+      const updated = { ...cards };
+      delete updated[id];
+      return updated;
+    });
   };
 
   return (
@@ -68,7 +80,9 @@ const Maker = ({ authService }) => {
         <CardMaker
           className={styles.cardMaker}
           cards={cards}
-          addCard={addCard}
+          addCard={createOrUpdateCard}
+          delCard={delCard}
+          updateCard={createOrUpdateCard}
         />
         <CardPreview className={styles.cardPreview} cards={cards} />
       </div>
