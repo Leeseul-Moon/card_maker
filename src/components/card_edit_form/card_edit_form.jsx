@@ -14,7 +14,8 @@ const CardEditForm = ({ FileInput, card, delCard, updateCard }) => {
   const themeRef = useRef();
 
   const onSubmit = () => {
-    delCard(id);
+    console.log("card :>> ", card);
+    delCard(card);
   };
 
   const onFileChange = (file) => {
@@ -26,10 +27,10 @@ const CardEditForm = ({ FileInput, card, delCard, updateCard }) => {
   };
 
   const onChange = (event) => {
+    event.preventDefault();
     if (event.currentTarget == null) {
       return;
     }
-    event.preventDefault();
     updateCard({
       ...card,
       [event.currentTarget.name]: event.currentTarget.value,
